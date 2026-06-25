@@ -17,3 +17,15 @@ dependencies = [
     "requests==2.32.5",
     "openpyxl>=3.1.0",
 ]
+
+[project.optional-dependencies]
+scraping = [
+  "nest-asyncio==1.6.0",
+  "playwright==1.57.0",
+  "scrapegraphai==1.76.0",
+]
+legacy = [
+  "faiss-cpu",
+  "numpy==2.2.6",
+  "sentence-transformers",
+]
