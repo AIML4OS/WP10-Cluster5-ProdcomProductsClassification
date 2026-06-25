@@ -39,7 +39,18 @@ jobs:
       # - name: Render in ipynb
       #   run: uv run quarto render --to ipynb
         
-      # Step 5: Publish website
+      # Step 5: Create gh-pages branch if it doesn't exist
+      - name: Initialize gh-pages branch if needed
+        run: |
+          if ! git ls-remote --exit-code --heads origin gh-pages; then
+            git checkout --orphan gh-pages
+            git rm -rf .
+            git commit --allow-empty -m "Initialize gh-pages branch"
+            git push origin gh-pages
+            git checkout -
+          fi
+
+      # Step 6: Publish website
       - name: Publish to GitHub Pages (and render)
         uses: quarto-dev/quarto-actions/publish@v2
         with:
